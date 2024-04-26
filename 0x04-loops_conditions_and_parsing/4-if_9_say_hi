@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#a script that prints a string ten times 
+
+var='Best School'
+num=1
+
+while ((num < 11)); do
+	echo "$var"
+	if [ "$num" -eq 9 ]; then
+		echo "Hi"
+	fi
+	((num++))
+done
+	
