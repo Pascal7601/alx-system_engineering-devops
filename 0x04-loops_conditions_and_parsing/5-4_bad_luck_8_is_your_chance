@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#prints bad lack at 4th iteration
+
+var='Best School'
+num=1
+
+while ((num < 11)); do
+	if [ "$num" -eq 4 ]; then
+		echo "bad lack"
+	elif [ "$num" -eq 8 ]; then
+		echo "good luck"
+	else
+		echo "$var"
+	fi
+	((num++))
+done
