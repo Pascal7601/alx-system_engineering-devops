@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#a script that prints a string ten times 
+
+var='Best School'
+
+for ((num=1; num < 11; num++)); do
+	echo "$var"
+done
