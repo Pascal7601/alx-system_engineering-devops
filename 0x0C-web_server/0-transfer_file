@@ -1,24 +1,28 @@
 #!/usr/bin/env bash
 
-# Check if the number of arguments is less than 4
-if [ "$#" -lt 4 ]; then
+# Check if the number of arguments is less than 3
+if [ $# -lt 3 ]; then
     echo "Usage: $0 PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
     exit 1
 fi
 
-# Assigning arguments to variables
-file_path="$1"
-server_ip="$2"
-username="$3"
-ssh_key="$4"
+# Assign the provided arguments to variables
+file_path=$1
+server_ip=$2
+username=$3
+ssh_key=$4
 
-# Transfer file using scp to the user's home directory on the server
-scp -o StrictHostKeyChecking=no -i "$ssh_key" "$file_path" "$username@$server_ip:~/"
+# If the path to SSH key is not provided, use the default SSH key location
+if [ -z "$ssh_key" ]; then
+    ssh_key="$HOME/.ssh/id_rsa"
+fi
 
-# Check if scp command was successful
+scp -o StrictHostKeyChecking=no -i "$ssh_key" "$file_path" "$username@$server_ip":~/
+
+# Check the exit status of scp
 if [ $? -eq 0 ]; then
-    echo "File transfer successful!"
+    echo "File transferred successfully to $username@$server_ip:~/"
 else
-    echo "File transfer failed!"
+    echo "Failed to transfer file to $username@$server_ip:~/"
 fi
 
