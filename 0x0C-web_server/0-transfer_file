@@ -19,10 +19,3 @@ fi
 
 scp -o StrictHostKeyChecking=no -i "$ssh_key" "$file_path" "$username@$server_ip":~/
 
-# Check the exit status of scp
-if [ $? -eq 0 ]; then
-    echo "File transferred successfully to $username@$server_ip:~/"
-else
-    echo "Failed to transfer file to $username@$server_ip:~/"
-fi
-
