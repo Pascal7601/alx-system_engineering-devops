@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Script that checks for port 80 in Nginx configuration and configures it if not present
+
+nginx_config="/etc/nginx/sites-available/default"
+
+if [ ! -f "$nginx_config" ]; then
+    echo "Error: Nginx configuration file $nginx_config not found."
+    exit 1
+fi
+
+if grep -q 'listen *:80' "$nginx_config"; then
+    echo "nginx is already configured to listen on port 80."
+else
+    echo "Port 80 not configured, configuring..."
+    if sudo sed -i 's/\(listen[[:space:]]*\):80/\1 *:80/' "$nginx_config"; then
+        sudo service nginx restart
+        echo "Port 80 configured. Nginx has restarted."
+    else
+        echo "Error: Failed to modify Nginx configuration."
+    fi
+fi
