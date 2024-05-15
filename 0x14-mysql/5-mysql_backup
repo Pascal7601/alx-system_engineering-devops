@@ -17,6 +17,5 @@ if [ $? -ne 0 ]; then
         echo "zipping the file failed"
         exit 1
 fi
-rm "${DUMP}"
 echo "archive file created succefuly..............."
 ~                                                                                                                       ~                                                 
