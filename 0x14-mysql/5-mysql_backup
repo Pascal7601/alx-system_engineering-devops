@@ -3,7 +3,13 @@
 
 DUMP="backup.sql"
 PASSWORD="$1"
-sudo mysqldump -u root -p "${PASSWORD}" --all-databases > "${DUMP}"
+
+if [ ! "$1" ]; then
+	echo "enter password"
+	exit 1
+fi
+
+sudo mysqldump -u root -p"${PASSWORD}" --all-databases > "${DUMP}"
 DATE=$(date +"%d-%m-%Y")
 ARCH_FILE="${DATE}.tar.gz"
 
