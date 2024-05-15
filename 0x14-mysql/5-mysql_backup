@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+#script to create a databse backup
+
+DUMP="backup.sql"
+PASSWORD="$1"
+sudo mysqldump -u root -p "${PASSWORD}" --all-databases > "${DUMP}"
+DATE=$(date +"%d-%m-%Y")
+ARCH_FILE="${DATE}.tar.gz"
+
+if [ $? -ne 0 ]; then
+        echo "ERROR mysqldump failed"
+        exit 1
+fi
+
+tar -czf "${ARCH_FILE}" "${DUMP}"
+if [ $? -ne 0 ]; then
+        echo "zipping the file failed"
+        exit 1
+fi
+rm "${DUMP}"
+echo "archive file created succefuly..............."
+~                                                                                                                       ~                                                 
