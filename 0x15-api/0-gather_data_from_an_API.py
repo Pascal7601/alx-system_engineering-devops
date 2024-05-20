@@ -27,4 +27,4 @@ if __name__ == '__main__':
 
     for r in res:
         if r.get('completed'):
-            print(f"\t{r.get('title')}")
+            print(f"\t {r.get('title')}")
